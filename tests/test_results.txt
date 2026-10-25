@@ -1,0 +1,37 @@
+Captured UTC: 2026-10-25T17:41:49.999490+00:00
+Runtime: CPython 3.12.6
+Platform: Windows-10-10.0.19045-SP0
+Command: python tests/capture_evidence.py
+JSONL fixtures: 19/19 semantic checks passed.
+
+test_dag_cycle_outside_source_reachability (test_algorithms.AlgorithmTests.test_dag_cycle_outside_source_reachability) ... ok
+test_dag_negative_distance_minus_one_and_unreachable (test_algorithms.AlgorithmTests.test_dag_negative_distance_minus_one_and_unreachable) ... ok
+test_dag_random_against_bellman_ford (test_algorithms.AlgorithmTests.test_dag_random_against_bellman_ford) ... ok
+test_dsu_random_against_set_partition (test_algorithms.AlgorithmTests.test_dsu_random_against_set_partition) ... ok
+test_dsu_repeated_self_unions_and_isolates (test_algorithms.AlgorithmTests.test_dsu_repeated_self_unions_and_isolates) ... ok
+test_empty_graphs_and_singleton_dag (test_algorithms.AlgorithmTests.test_empty_graphs_and_singleton_dag) ... ok
+test_forest_totals_exceed_signed_32_bits (test_algorithms.AlgorithmTests.test_forest_totals_exceed_signed_32_bits) ... ok
+test_forests_disconnected_negative_parallel_tied_and_self_loops (test_algorithms.AlgorithmTests.test_forests_disconnected_negative_parallel_tied_and_self_loops) ... ok
+test_forests_random_against_exhaustive_subsets (test_algorithms.AlgorithmTests.test_forests_random_against_exhaustive_subsets) ... ok
+test_route_helper_reachable_source_unreachable_parallel_and_ties (test_algorithms.AlgorithmTests.test_route_helper_reachable_source_unreachable_parallel_and_ties) ... ok
+test_scc_condensation_deduplicates_and_keeps_isolates (test_algorithms.AlgorithmTests.test_scc_condensation_deduplicates_and_keeps_isolates) ... ok
+test_scc_random_against_transitive_closure (test_algorithms.AlgorithmTests.test_scc_random_against_transitive_closure) ... ok
+test_topological_finished_neighbor_is_not_a_cycle (test_algorithms.AlgorithmTests.test_topological_finished_neighbor_is_not_a_cycle) ... ok
+test_topological_random_against_kahn (test_algorithms.AlgorithmTests.test_topological_random_against_kahn) ... ok
+test_topological_self_loop_and_disconnected_cycle (test_algorithms.AlgorithmTests.test_topological_self_loop_and_disconnected_cycle) ... ok
+test_transport_mixed_requests_repeat_and_reset_state (test_algorithms.AlgorithmTests.test_transport_mixed_requests_repeat_and_reset_state) ... ok
+test_dag_100000_deep_chain_250000_edges_and_route (test_algorithms.FullLimitTests.test_dag_100000_deep_chain_250000_edges_and_route) ... ok
+test_dsu_100000_vertices_250000_operations (test_algorithms.FullLimitTests.test_dsu_100000_vertices_250000_operations) ... ok
+test_forests_100000_vertices_250000_edges (test_algorithms.FullLimitTests.test_forests_100000_vertices_250000_edges) ... ok
+test_scc_100000_cycle (test_algorithms.FullLimitTests.test_scc_100000_cycle) ... ok
+test_scc_100000_deep_chain_250000_edges (test_algorithms.FullLimitTests.test_scc_100000_deep_chain_250000_edges) ... ok
+test_topological_100000_deep_chain_250000_edges (test_algorithms.FullLimitTests.test_topological_100000_deep_chain_250000_edges) ... ok
+test_dag_alternative_parent_edges_and_invalid_direction_or_distance (test_algorithms.WitnessCheckerTests.test_dag_alternative_parent_edges_and_invalid_direction_or_distance) ... ok
+test_forest_alternative_and_invalid_cycle_or_id (test_algorithms.WitnessCheckerTests.test_forest_alternative_and_invalid_cycle_or_id) ... ok
+test_scc_alternative_labels_and_invalid_partition_or_condensation (test_algorithms.WitnessCheckerTests.test_scc_alternative_labels_and_invalid_partition_or_condensation) ... ok
+test_topological_alternative_and_invalid_precedence_or_duplicate (test_algorithms.WitnessCheckerTests.test_topological_alternative_and_invalid_precedence_or_duplicate) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 1.976s
+
+OK

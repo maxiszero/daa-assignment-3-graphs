@@ -1,0 +1,116 @@
+[
+  {
+    "name": "ping",
+    "input": {"task": "ping"},
+    "expected": {"status": "ready"},
+    "why": "The supplied transport contract defines ping as ready."
+  },
+  {
+    "name": "empty_dsu",
+    "input": {"task": "dsu", "n": 0, "operations": []},
+    "expected": {"states": []},
+    "why": "No operations means no states, including no initial state."
+  },
+  {
+    "name": "unions_repeated_self_and_isolate",
+    "input": {"task": "dsu", "n": 6, "operations": [[0,0],[0,1],[1,0],[2,3],[1,3],[5,5]]},
+    "expected": {"states": [[6,1],[5,2],[5,2],[4,2],[3,4],[3,4]]},
+    "why": "The only merged nontrivial final set is {0,1,2,3}; 4 and 5 remain isolated. Repeated/self unions change nothing."
+  },
+  {
+    "name": "empty_kruskal",
+    "input": {"task": "kruskal", "n": 0, "edges": []},
+    "expected": {"cost": 0, "edge_ids": [], "components": 0},
+    "why": "An empty graph has no components or selected edges."
+  },
+  {
+    "name": "empty_prim",
+    "input": {"task": "prim", "n": 0, "edges": []},
+    "expected": {"cost": 0, "edge_ids": [], "components": 0},
+    "why": "An empty graph has no components or selected edges."
+  },
+  {
+    "name": "forest_kruskal_negative_parallel_ties",
+    "input": {"task": "kruskal", "n": 6, "edges": [[0,0,-100],[0,1,8],[0,1,-4],[1,2,2],[0,2,2],[3,4,-7],[3,4,-7],[4,4,-99]]},
+    "expected": {"cost": -9, "edge_ids": [2,3,5], "components": 3},
+    "why": "Component {0,1,2} needs weights -4 and 2; {3,4} needs -7; 5 is isolated. Loops cannot be selected. Either equal-cost choice is valid."
+  },
+  {
+    "name": "forest_prim_negative_parallel_ties",
+    "input": {"task": "prim", "n": 6, "edges": [[0,0,-100],[0,1,8],[0,1,-4],[1,2,2],[0,2,2],[3,4,-7],[3,4,-7],[4,4,-99]]},
+    "expected": {"cost": -9, "edge_ids": [2,4,6], "components": 3},
+    "why": "Same graph and optimum as Kruskal; this stored witness intentionally uses different tied edges."
+  },
+  {
+    "name": "forest_large_positive_total",
+    "input": {"task": "prim", "n": 5, "edges": [[0,1,1000000000],[1,2,1000000000],[2,3,1000000000],[3,4,1000000000]]},
+    "expected": {"cost": 4000000000, "edge_ids": [0,1,2,3], "components": 1},
+    "why": "The graph is a tree, so all four edges are mandatory; total exceeds signed 32 bits."
+  },
+  {
+    "name": "empty_scc",
+    "input": {"task": "scc", "n": 0, "edges": []},
+    "expected": {"component": [], "condensation": []},
+    "why": "No vertices and no edges produce empty arrays."
+  },
+  {
+    "name": "scc_duplicate_condensation_isolate",
+    "input": {"task": "scc", "n": 5, "edges": [[0,1],[1,0],[0,2],[1,2],[1,2],[2,2],[2,3],[3,2]]},
+    "expected": {"component": [7,7,9,9,12], "condensation": [[7,9]]},
+    "why": "Mutual reachability gives {0,1}, {2,3}, {4}; all three cross edges induce exactly one condensation pair."
+  },
+  {
+    "name": "empty_topo",
+    "input": {"task": "topo", "n": 0, "edges": []},
+    "expected": {"acyclic": true, "order": []},
+    "why": "The empty order satisfies every edge constraint vacuously."
+  },
+  {
+    "name": "topo_finished_neighbor_and_duplicate",
+    "input": {"task": "topo", "n": 5, "edges": [[0,1],[0,2],[2,1],[2,1]]},
+    "expected": {"acyclic": true, "order": [3,4,0,2,1]},
+    "why": "Required precedence is 0 before 2 before 1; vertices 3 and 4 may occur anywhere. An edge to a finished DFS vertex is harmless."
+  },
+  {
+    "name": "topo_disconnected_cycle",
+    "input": {"task": "topo", "n": 5, "edges": [[0,1],[2,3],[3,2]]},
+    "expected": {"acyclic": false, "order": []},
+    "why": "2 to 3 to 2 is a directed cycle, even though the first component is acyclic."
+  },
+  {
+    "name": "topo_self_loop",
+    "input": {"task": "topo", "n": 2, "edges": [[1,1]]},
+    "expected": {"acyclic": false, "order": []},
+    "why": "A self-loop contradicts strict precedence."
+  },
+  {
+    "name": "dag_singleton",
+    "input": {"task": "dag", "n": 1, "source": 0, "edges": []},
+    "expected": {"acyclic": true, "distance": [0], "parent_edge": [-1]},
+    "why": "The source has an empty path of cost zero."
+  },
+  {
+    "name": "dag_negative_unreachable_parallel_ties",
+    "input": {"task": "dag", "n": 5, "source": 0, "edges": [[0,1,3],[0,2,8],[1,2,-7],[2,3,4],[0,1,3],[0,3,0]]},
+    "expected": {"acyclic": true, "distance": [0,3,-4,0,null], "parent_edge": [-1,4,2,3,-1]},
+    "why": "0 to 1 costs 3 via either parallel edge; 0 to 1 to 2 costs -4; 3 has tied routes of cost zero; 4 is isolated."
+  },
+  {
+    "name": "dag_unreachable_cycle",
+    "input": {"task": "dag", "n": 5, "source": 0, "edges": [[0,1,7],[2,3,-1],[3,2,2]]},
+    "expected": {"acyclic": false, "distance": [], "parent_edge": []},
+    "why": "The unreachable component 2 to 3 to 2 is cyclic, so the entire request must be rejected."
+  },
+  {
+    "name": "dag_minus_one_finite_and_no_relaxation_from_unreachable",
+    "input": {"task": "dag", "n": 5, "source": 0, "edges": [[0,1,-1],[1,2,-1000000000],[3,4,-1000000000]]},
+    "expected": {"acyclic": true, "distance": [0,-1,-1000000001,null,null], "parent_edge": [-1,0,1,-1,-1]},
+    "why": "-1 is a valid finite distance. Vertices 3 and 4 remain unreachable despite their negative edge."
+  },
+  {
+    "name": "dag_large_negative_total",
+    "input": {"task": "dag", "n": 5, "source": 0, "edges": [[0,1,-1000000000],[1,2,-1000000000],[2,3,-1000000000],[3,4,-1000000000]]},
+    "expected": {"acyclic": true, "distance": [0,-1000000000,-2000000000,-3000000000,-4000000000], "parent_edge": [-1,0,1,2,3]},
+    "why": "The only path to vertex v contains v edges of weight -10^9, exceeding 32-bit range at vertices 3 and 4."
+  }
+]

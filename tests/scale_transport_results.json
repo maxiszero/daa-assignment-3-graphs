@@ -1,0 +1,72 @@
+{
+  "captured_utc": "2026-10-25T17:41:55.247328+00:00",
+  "runtime": "CPython 3.12.6",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "command": "python tests/scale_transport.py",
+  "generator": "n=100000,m/q=250000; chain then repeated 0-to-n-1 edges; chain weights -10^9, extras +10^9",
+  "timeout_seconds": 20,
+  "elapsed_process_seconds": 1.9854143999999678,
+  "timing_boundary": "Process launch, JSON serialization inside child, parsing inside child, all algorithms, pipe input/output; excludes parent input generation and semantic validation",
+  "input_utf8_bytes": 25816915,
+  "input_sha256": "25ad6d93dd63563e2be213f6c1be27f9167bb984d497349f3cf84502f4307610",
+  "actual_output_utf8_bytes": 8939110,
+  "actual_output_sha256": "590f701e0831c7386d3eba3445e8f5300630dc0509a3affe2b168adaea4bffa3",
+  "exit_code": 0,
+  "stderr": "",
+  "results": [
+    {
+      "task": "dsu",
+      "n": 100000,
+      "m_or_q": 250000,
+      "passed": true,
+      "states": 250000,
+      "last_state": [
+        1,
+        100000
+      ]
+    },
+    {
+      "task": "kruskal",
+      "n": 100000,
+      "m_or_q": 250000,
+      "passed": true,
+      "cost": -99999000000000,
+      "components": 1,
+      "selected_edges": 99999
+    },
+    {
+      "task": "prim",
+      "n": 100000,
+      "m_or_q": 250000,
+      "passed": true,
+      "cost": -99999000000000,
+      "components": 1,
+      "selected_edges": 99999
+    },
+    {
+      "task": "scc",
+      "n": 100000,
+      "m_or_q": 250000,
+      "passed": true,
+      "components": 100000,
+      "condensation_pairs": 100000
+    },
+    {
+      "task": "topo",
+      "n": 100000,
+      "m_or_q": 250000,
+      "passed": true,
+      "acyclic": true,
+      "order_length": 100000
+    },
+    {
+      "task": "dag",
+      "n": 100000,
+      "m_or_q": 250000,
+      "passed": true,
+      "acyclic": true,
+      "distance_length": 100000,
+      "last_distance": -99999000000000
+    }
+  ]
+}

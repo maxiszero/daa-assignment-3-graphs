@@ -1,0 +1,46 @@
+Captured UTC: 2026-10-25T17:42:47.546073+00:00
+$ python tools/run.py --setup
+PASS setup: ping
+Language: Python
+Exit code: 0
+
+$ python tools/run.py --check
+PASS public 1: ping published example
+PASS public 2: dsu published example
+PASS public 3: kruskal published example
+PASS public 4: prim published example
+PASS public 5: scc published example
+PASS public 6: topo published example
+PASS public 7: dag published example
+PASS public 8: dsu empty
+PASS public 9: dsu self union and repeat
+PASS public 10: dsu disconnected
+PASS public 11: kruskal empty
+PASS public 12: kruskal isolated vertices
+PASS public 13: kruskal negative loops and parallel edges
+PASS public 14: kruskal tied optima
+PASS public 15: kruskal 64 bit sum
+PASS public 16: prim empty
+PASS public 17: prim isolated vertices
+PASS public 18: prim negative loops and parallel edges
+PASS public 19: prim tied optima
+PASS public 20: prim 64 bit sum
+PASS public 21: scc empty
+PASS public 22: scc isolated
+PASS public 23: scc duplicates and self loops
+PASS public 24: topo empty
+PASS public 25: topo isolated and parallel
+PASS public 26: topo self cycle
+PASS public 27: topo disconnected cycle
+PASS public 28: dag singleton
+PASS public 29: dag unreachable and distance minus one
+PASS public 30: dag unreachable cycle
+PASS public 31: dag self cycle
+PASS public 32: dag tied paths and parallel edges
+PASS public 33: dag 64 bit sum
+PASS public 34: scc deep chain
+PASS public 35: topo deep chain
+PASS public 36: dag deep chain
+PASS state reset: two complete batches in one process
+Language: Python
+Exit code: 0

@@ -1,0 +1,31 @@
+name: Public checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: '8.0.x'
+      - name: Test public checking tools
+        run: python -m unittest discover -s tools -p "test_*.py"
+      - name: Compile and launch selected language
+        run: python tools/run.py --setup
+      - name: Check all template languages
+        if: github.repository == 'RZhaniya/daa-assignment-3-graphs'
+        run: python -c "import subprocess; [subprocess.run(['python','tools/run.py','--language',lang,'--setup'],check=True) for lang in ['Java','Python','Cpp','CSharp']]"
+      - name: Check your algorithms and request-state reset
+        if: github.repository != 'RZhaniya/daa-assignment-3-graphs'
+        run: python tools/run.py --check
